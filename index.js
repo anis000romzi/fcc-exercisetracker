@@ -82,10 +82,8 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
 app.get('/api/users/:_id/logs', async (req, res) => {
   const data = await User.findById(req.params._id);
   const response = { _id: data._id, username: data.username };
-  let exerciseData = await Exercise.find(
-    { user_id: req.params._id },
-    'description duration date -_id'
-  );
+  let exerciseData = await Exercise.find({ user_id: req.params._id }, 'description duration date -_id');
+
   if (req.query.from) {
     if (!new Date(req.query.from).getTime()) {
       exerciseData;
